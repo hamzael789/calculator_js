@@ -71,6 +71,8 @@ function ButtonClick(button) {
 
 
 
+
+
 //TOUS les boutons sans boucle
 // let button1 = document.createElement('button'); //on crée un bouton
 // let textButton1 = document.createTextNode('C'); //on crée un texte pour le bouton
