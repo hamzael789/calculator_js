@@ -12,21 +12,62 @@ divScreen.setAttribute("class", "ecran")
 
 let touches = document.createElement('div'); //on crée une div pour les touches
 divCalculator.appendChild(touches); //on ajoute la div des touches à la div principale  
-
+touches.setAttribute("class", "touches")
 
 //Boucle pour les touches
-let buttons = [
-    "(", ")", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="
-];
+let buttons = [ "C","(", ")", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="];
 
 buttons.forEach(function(text) {
     let btn = document.createElement("button");
     let textBtn = document.createTextNode(text);
-    btn.setAttribute("class", "button");
+    btn.classList.add("btn" + text)
+    // btn.setAttribute("class", "button");
+
     btn.appendChild(textBtn);
+    touches.appendChild(btn);
+
+    // Ajout de l'événement pour gérer les clics
+    btn.addEventListener('click', () => handleButtonClick(text));
     touches.appendChild(btn);
 });
 
+
+
+
+// Variable pour stocker l'état de l'écran
+let ecranCalculatrice = "";
+
+// Mise à jour de l'écran
+function maj(value) {
+    divScreen.textContent = value;
+}
+
+// Fonction pour gérer les clics de boutons
+function handleButtonClick(button) {
+    if (!isNaN(button) || button === '.') { 
+        // Si c'est un chiffre ou un point
+        ecranCalculatrice += button;
+        maj(ecranCalculatrice);
+    } else if (button === 'C') { 
+        // Si c'est "C", on réinitialise
+        ecranCalculatrice = '';
+        maj(ecranCalculatrice);
+    } else if (button === '=') { 
+        // Si c'est "=", on calcule le résultat
+        try {
+            let result = eval(ecranCalculatrice); // Calcul de l'expression
+            ecranCalculatrice = result.toString(); // Conversion du résultat en chaîne
+            maj(ecranCalculatrice);
+        } catch (error) {
+            ecranCalculatrice = 'Erreur';
+            maj(ecranCalculatrice);
+        }
+    } else { 
+        // Si c'est un opérateur
+        ecranCalculatrice += button;
+        maj(ecranCalculatrice);
+    }
+}
 
 
 
