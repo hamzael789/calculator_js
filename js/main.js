@@ -26,8 +26,8 @@ buttons.forEach(function(text) {
     btn.appendChild(textBtn);
     touches.appendChild(btn);
 
-    // Ajout de l'événement pour gérer les clics
-    btn.addEventListener('click', () => handleButtonClick(text));
+    // Ajout de l'événement pour gérer les clics, on appelle la fonction ButtonClick codée plus bas
+    btn.addEventListener('click', () => ButtonClick(text));
     touches.appendChild(btn);
 });
 
@@ -43,7 +43,7 @@ function maj(value) {
 }
 
 // Fonction pour gérer les clics de boutons
-function handleButtonClick(button) {
+function ButtonClick(button) {
     if (!isNaN(button) || button === '.') { 
         // Si c'est un chiffre ou un point
         ecranCalculatrice += button;
